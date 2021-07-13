@@ -1,19 +1,17 @@
-import {createStore} from 'redux';
-import axios from 'axios';
+import { createStore } from "redux";
 
 const initialState = {
-    data: []
-}
+  data: []
+};
 
-
-const reducer = (state = initialState, action) =>  {
-    switch(action.type) {
-        case "GET_DATA":
-            return {...state};
-        default: 
-            return state;
-    }
-}
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_DATA":
+      return { ...state, data: action.payload};
+    default:
+      return state;
+  }
+};
 
 const store = createStore(reducer);
 

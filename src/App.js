@@ -1,10 +1,10 @@
 import "./App.css";
-import CardData from "./CardData";
 import store from "./store/";
 import "semantic-ui-css/semantic.min.css";
-import { Grid, Header } from "semantic-ui-react";
+import { } from "semantic-ui-react";
 import { Component } from "react";
 import HeaderComponent from "./components/HeaderComponent";
+import CardComponent from "./components/CardComponent";
 
 
 class App extends Component {
@@ -12,9 +12,7 @@ class App extends Component {
     return (
       <div>
         <HeaderComponent />
-      <Grid container>
-        <CardData store={store}></CardData>
-      </Grid>
+        <CardComponent store={store} />
     </div>
     );
   }
