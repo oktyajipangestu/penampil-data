@@ -15,7 +15,7 @@ class CardData extends Component {
       pageCount: 0,
       offset: 0,
       perPage: 9,
-      currentpage: 0
+      currentpage: 0,
     };
   }
 
@@ -25,7 +25,10 @@ class CardData extends Component {
         .get(`https://jsonplaceholder.typicode.com/posts`)
         .then((res) => {
           let dataRes = res.data;
-          let dataResSlice = res.data.slice(this.state.offset, this.state.perPage + this.state.offset);
+          let dataResSlice = res.data.slice(
+            this.state.offset,
+            this.state.perPage + this.state.offset
+          );
           this.setState({
             data: dataResSlice,
             pageCount: Math.ceil(dataRes.length / this.state.perPage),
@@ -49,8 +52,14 @@ class CardData extends Component {
         await axios
           .get(`https://jsonplaceholder.typicode.com/posts`)
           .then((res) => {
+            let dataRes = res.data;
+            let dataResSlice = res.data.slice(
+              this.state.offset,
+              this.state.perPage + this.state.offset
+            );
             this.setState({
-              data: res.data,
+              data: dataResSlice,
+              pageCount: Math.ceil(dataRes.length / this.state.perPage),
             });
           });
       } else {
@@ -72,14 +81,15 @@ class CardData extends Component {
     let offset = Math.ceil(selected * this.state.perPage);
 
     this.setState(
-        { 
-            offset: offset,
-            currentpage: selected
-        }, () => {
-      this.getData();
-    });
+      {
+        offset: offset,
+        currentpage: selected,
+      },
+      () => {
+        this.getData();
+      }
+    );
   };
-
 
   componentDidMount = () => {
     this.getData();
@@ -123,19 +133,19 @@ class CardData extends Component {
           })}
         </Grid>
 
-        <Grid container textAlign="center" style={{marginTop: '50px'}}>
-            <ReactPaginate
-              previousLabel={"previous"}
-              nextLabel={"next"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={this.state.pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.handlePageClick}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-            />
+        <Grid container textAlign="center" style={{ marginTop: "50px" }}>
+          <ReactPaginate
+            previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+          />
         </Grid>
       </div>
     );
