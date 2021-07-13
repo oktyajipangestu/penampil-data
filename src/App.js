@@ -4,25 +4,14 @@ import store from "./store/";
 import "semantic-ui-css/semantic.min.css";
 import { Grid, Header } from "semantic-ui-react";
 import { Component } from "react";
+import HeaderComponent from "./components/HeaderComponent";
 
-// function App() {
-//   return (
-//     <div>
-//       <Grid container>
-//         <Header as="h2">Aplikasi Penampil Data</Header>
-//         <CardData store={store}></CardData>
-//       </Grid>
-//     </div>
-//   );
-// }
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Grid container  textAlign="center">
-        <Header as="h1"  style={{marginTop: "50px", marginBottom: "50px"}}>Aplikasi Penampil Data</Header>
-        </Grid>
+        <HeaderComponent />
       <Grid container>
         <CardData store={store}></CardData>
       </Grid>
