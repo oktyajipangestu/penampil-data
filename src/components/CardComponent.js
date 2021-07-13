@@ -3,9 +3,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import "semantic-ui-css/semantic.min.css";
-import { Grid, Input, Button } from "semantic-ui-react";
+import { Grid, Input, Button, GridRow, GridColumn, Card } from "semantic-ui-react";
 import ReactPaginate from "react-paginate";
-import { Container, Row, Card, CardColumns } from "react-bootstrap";
 
 class CardComponent extends Component {
   constructor(props) {
@@ -27,8 +26,6 @@ class CardComponent extends Component {
       offset: offset,
       currentpage: selected,
     });
-
-    console.log(this.state.offset);
   };
 
   handleChange = (e) => {
@@ -92,47 +89,72 @@ class CardComponent extends Component {
           </Grid.Column>
         </Grid>
 
-        <Container className="mt-5">
-          <Row>
-            <CardColumns>
-              {sliced
-                .filter((data) => {
-                  if (this.state.dataCari === "") {
-                    return data;
-                  } else if (
-                    data.title
-                      .toLowerCase()
-                      .includes(this.state.dataCari.toLowerCase())
-                  ) {
-                    return data;
-                  }
-                })
-                .map((data, index) => {
-                  return (
-                    <Card key={index}>
-                      <Card.Body>
-                        <Card.Title>
-                          <b>{data.title}</b>
-                        </Card.Title>
-                        <hr />
-                        <Card.Text>{data.body}</Card.Text>
-                      </Card.Body>
-                    </Card>
-                  );
-                })}
-            </CardColumns>
-          </Row>
-        </Container>
+        <Grid container>
+          <GridRow  columns={3} only='computer tablet' style={{margin: "auto"}}>
+            {sliced
+              .filter((data) => {
+                if (this.state.dataCari === "") {
+                  return data;
+                } else if (
+                  data.title
+                    .toLowerCase()
+                    .includes(this.state.dataCari.toLowerCase())
+                ) {
+                  return data;
+                }
+              })
+              .map((data, index) => {
+                return (
+                    <GridColumn style={{marginBottom:"30px"}}>
+                        <Card key={index} style={{margin: "auto"}}>
+                            <Card.Content>
+                                <b>{data.title}</b>
+                            </Card.Content>
+                            <Card.Content>{data.body}</Card.Content>
+                        </Card>
+                    </GridColumn>
+                );
+              })}
+          </GridRow>
 
-        <Grid container textAlign="center" style={{ marginTop: "50px" }}>
+          <GridRow  columns={1} only='mobile'>
+            {sliced
+              .filter((data) => {
+                if (this.state.dataCari === "") {
+                  return data;
+                } else if (
+                  data.title
+                    .toLowerCase()
+                    .includes(this.state.dataCari.toLowerCase())
+                ) {
+                  return data;
+                }
+              })
+              .map((data, index) => {
+                return (
+                    <GridColumn>
+                        <Card key={index}>
+                            <Card.Content>
+                                <b>{data.title}</b>
+                            </Card.Content>
+                            <Card.Content>{data.body}</Card.Content>
+                        </Card>
+                    </GridColumn>
+                );
+              })}
+          </GridRow>
+
+        </Grid>
+
+        <Grid container textAlign="center" style={{ marginTop: "50px" }} only='computer tablet'>
           <ReactPaginate
             previousLabel={"previous"}
             nextLabel={"next"}
             breakLabel={"..."}
             breakClassName={"break-me"}
             pageCount={this.state.pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={2}
             onPageChange={this.handlePageClick}
             containerClassName={"pagination"}
             activeClassName={"active"}
