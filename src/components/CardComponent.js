@@ -70,23 +70,25 @@ class CardComponent extends Component {
 
     return (
       <div>
-        <Grid container>
-          <Grid.Column textAlign="right">
-            <Input
-              icon="search"
-              placeholder="Search..."
-              onChange={(e) => {
-                this.handleChange(e);
-              }}
-            />
-            <Button
-              primary
-              style={{ marginLeft: "20px" }}
-              onClick={this.handleChangeSubmit}
-            >
-              Cari
-            </Button>
-          </Grid.Column>
+        <Grid container style={{marginTop: "30px"}}>
+          <GridRow>
+            <Grid.Column textAlign="right">
+              <Input
+                icon="search"
+                placeholder="Search..."
+                onChange={(e) => {
+                  this.handleChange(e);
+                }}
+              />
+              <Button
+                primary
+                style={{ marginLeft: "20px" }}
+                onClick={this.handleChangeSubmit}
+              >
+                Cari
+              </Button>
+            </Grid.Column>
+          </GridRow>
         </Grid>
 
         <Grid container>
@@ -117,7 +119,7 @@ class CardComponent extends Component {
               })}
           </GridRow>
 
-          <GridRow  columns={1} only='mobile'>
+          <GridRow  columns={1} only='mobile' style={{margin: "auto"}}>
             {sliced
               .filter((data) => {
                 if (this.state.dataCari === "") {
@@ -132,8 +134,8 @@ class CardComponent extends Component {
               })
               .map((data, index) => {
                 return (
-                    <GridColumn>
-                        <Card key={index}>
+                    <GridColumn style={{margin: "auto"}}>
+                        <Card key={index} style={{margin: "auto", marginBottom:'20px'}}>
                             <Card.Content>
                                 <b>{data.title}</b>
                             </Card.Content>
@@ -146,7 +148,7 @@ class CardComponent extends Component {
 
         </Grid>
 
-        <Grid container textAlign="center" style={{ marginTop: "50px" }} only='computer tablet'>
+        <Grid container textAlign="center" style={{ marginTop: "50px" }}>
           <ReactPaginate
             previousLabel={"previous"}
             nextLabel={"next"}
