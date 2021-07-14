@@ -63,10 +63,10 @@ class CardComponent extends Component {
 
   render() {
     const data = this.props.data;
-    const sliced = data.slice(
-      this.state.offset,
-      this.state.perPage + this.state.offset
-    );
+    // const sliced = data.slice(
+    //   this.state.offset,
+    //   this.state.perPage + this.state.offset
+    // );
 
     return (
       <div>
@@ -93,7 +93,7 @@ class CardComponent extends Component {
 
         <Grid container>
           <GridRow  columns={3} only='computer tablet' style={{margin: "auto"}}>
-            {sliced
+            {data
               .filter((data) => {
                 if (this.state.dataCari === "") {
                   return data;
@@ -105,10 +105,14 @@ class CardComponent extends Component {
                   return data;
                 }
               })
+              .slice(
+                this.state.offset,
+                this.state.perPage + this.state.offset
+              )
               .map((data, index) => {
                 return (
                     <GridColumn style={{marginBottom:"30px"}}>
-                        <Card key={index} style={{margin: "auto"}}>
+                        <Card key={index} style={{margin: "auto", marginBottom:'20px'}}>
                             <Card.Content>
                                 <b>{data.title}</b>
                             </Card.Content>
@@ -119,8 +123,8 @@ class CardComponent extends Component {
               })}
           </GridRow>
 
-          <GridRow  columns={1} only='mobile' style={{margin: "auto"}}>
-            {sliced
+          <GridRow columns={1} only='mobile' style={{margin: "auto"}}>
+            {data
               .filter((data) => {
                 if (this.state.dataCari === "") {
                   return data;
@@ -132,6 +136,10 @@ class CardComponent extends Component {
                   return data;
                 }
               })
+              .slice(
+                this.state.offset,
+                this.state.perPage + this.state.offset
+              )
               .map((data, index) => {
                 return (
                     <GridColumn style={{margin: "auto"}}>
